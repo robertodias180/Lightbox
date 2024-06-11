@@ -30,7 +30,12 @@ public class LightboxConfig {
   ///
   /// 0 - Preload all images (default).
   public static var preload = 0
-
+    
+  public struct HeaderView {
+      /// Default order is Delete - Close
+    public static var invertButtons = false
+  }
+    
   public struct PageIndicator {
     public static var enabled = true
     public static var separatorColor = UIColor(hex: "3D4757")

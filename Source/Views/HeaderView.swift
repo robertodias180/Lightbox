@@ -101,12 +101,12 @@ extension HeaderView: LayoutConfigurable {
     }
 
     closeButton.frame.origin = CGPoint(
-      x: bounds.width - closeButton.frame.width - 17,
+      x: LightboxConfig.HeaderView.invertButtons ? 17 : bounds.width - closeButton.frame.width - 17,
       y: topPadding
     )
 
     deleteButton.frame.origin = CGPoint(
-      x: 17,
+      x: !LightboxConfig.HeaderView.invertButtons ? 17 : bounds.width - deleteButton.frame.width - 17,
       y: topPadding
     )
   }
