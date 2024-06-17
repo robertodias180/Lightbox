@@ -156,7 +156,9 @@ class PageView: UIScrollView {
     if LightboxConfig.tapOutsideToClose {
       let location = recognizer.location(in: self)
       if !imageView.frame.intersects(CGRect(x: location.x, y: location.y, width: 1, height: 1)) {
-        pageViewDelegate?.close(self)
+        DispatchQueue.main.async { [unowned self] in
+          pageViewDelegate?.close(self)
+        }
         return
       }
     }
