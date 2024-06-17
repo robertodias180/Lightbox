@@ -7,7 +7,9 @@ protocol PageViewDelegate: AnyObject {
   func pageView(_ pageView: PageView, didTouchPlayButton videoURL: URL)
   func pageViewDidTouch(_ pageView: PageView)
   func pageViewDidTap(_ pageView: PageView)
-  func pageViewDidDoubleTap(_ pageView: PageView)}
+  func pageViewDidDoubleTap(_ pageView: PageView)
+  func close(_ pageView: PageView)
+}
 
 class PageView: UIScrollView {
 
@@ -151,6 +153,14 @@ class PageView: UIScrollView {
   }
 
   @objc func viewTapped(_ recognizer: UITapGestureRecognizer) {
+    if LightboxConfig.tapOutsideToClose {
+      let location = recognizer.location(in: self)
+      if !imageView.frame.intersects(CGRect(x: location.x, y: location.y, width: 1, height: 1)) {
+        pageViewDelegate?.close(self)
+        return
+      }
+    }
+      
     pageViewDelegate?.pageViewDidTouch(self)
     pageViewDelegate?.pageViewDidTap(self)
   }

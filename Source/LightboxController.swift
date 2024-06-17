@@ -343,8 +343,8 @@ open class LightboxController: UIViewController {
     pageView?.playButton.isHidden = !visible
 
     UIView.animate(withDuration: duration, delay: delay, options: [], animations: {
-      self.headerView.alpha = alpha
-      self.footerView.alpha = alpha
+      self.headerView.alpha = LightboxConfig.HeaderView.allowHide ? alpha : 1
+      self.footerView.alpha = LightboxConfig.FooterViewView.allowHide ? alpha : 1
       pageView?.playButton.alpha = alpha
     }, completion: nil)
   }
@@ -434,6 +434,10 @@ extension LightboxController: PageViewDelegate {
     
   func pageViewDidDoubleTap(_ pageView: PageView) {
     imageTapDelegate?.lightboxController(self, didDoubleTap: images[currentPage], at: currentPage)
+  }
+    
+  func close(_ pageView: PageView) {
+    headerView(headerView, didPressCloseButton: headerView.closeButton)
   }
 }
 

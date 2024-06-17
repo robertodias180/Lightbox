@@ -7,6 +7,7 @@ public class LightboxConfig {
   public static var hideStatusBar = true
     
   public static var imageBackgroundColor = UIColor.black
+  public static var tapOutsideToClose = false
 
   /// Provide a closure to handle selected video
   public static var handleVideo: (_ from: UIViewController, _ videoURL: URL) -> Void = { from, videoURL in
@@ -34,6 +35,11 @@ public class LightboxConfig {
   public struct HeaderView {
       /// Default order is Delete - Close
     public static var invertButtons = false
+    public static var allowHide = true
+  }
+    
+  public struct FooterViewView {
+    public static var allowHide = true
   }
     
   public struct PageIndicator {
