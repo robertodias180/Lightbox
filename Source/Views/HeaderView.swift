@@ -75,6 +75,15 @@ open class HeaderView: UIView {
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+    
+  open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    if LightboxConfig.tapOutsideToClose {
+      DispatchQueue.main.async { [unowned self] in
+        delegate?.headerView(self, didPressCloseButton: closeButton)
+      }
+    }
+  }
 
   // MARK: - Actions
 
